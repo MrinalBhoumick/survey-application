@@ -1,0 +1,73 @@
+Employee ID,Employee Name,Contact,Status,Designation,Department
+E0001,Krishna Kumar,8840155076,In,Delivery Head,Leadership
+E0012,Arunava Mukherjee,9681316717,Out,Senior Cloud Engineer,CTO
+E0005,Krishna Mukherjee,9038381132,Out,,CTO
+E0010,Sudhir Kumar Mohapatra,7008912605,Out,,CTO
+E0048,Arbind Kumar Mahato,7003967266,In,,CTO
+E0055,Dipannita Pal,91-7003987010,Leave,,CTO
+E0067,Arghya Sengupta,8777032280,In,,CTO
+E0070,Jahangeer Alam,8618199208,In,,CTO
+E0068,Rani Mishra,,In,,CTO
+E0153,Vivek Jha,9123329399,In,,CTO
+E0007,Niraj Kumar,9709858077,In,Service Delivery Head,Leadership
+E0046,Boddu Sai Varun,91-9032153259,Leave,Cloud Engineer,Engineering
+E0056,S. Srinuwas Rao,91-9853888409,In,Cloud Engineer,Engineering
+E0054,Manikumar Gantasala,91-9490880827,Leave,Cloud Engineer,Engineering
+E0063,Istiyak Ahmed,7044695313,In,Cloud Engineer,Engineering
+E0061,Subhranshu Sekhar Behera,9348338192,In,Cloud Engineer,Engineering
+E0060,Manasranjan Samal,7077221610,In,Cloud Engineer,Engineering
+E0079,Avula Lakshmikanth Reddy,,Leave,Cloud Engineer,Engineering
+E0071,Chikkala Chandu Babu,,Out,Cloud Engineer,Engineering
+E0078,Boddu Sai Prakash,,Leave,Cloud Engineer,Engineering
+E0080,Rajesh Swain,09937177899,In,Cloud Engineer,Engineering
+E0085,Vivek Patel,,In,Cloud Engineer,Engineering
+E0022,Devendra Pratap Maurya,6386846488,In,Cloud Engineer - DevOps,DevOps
+E0114,Sarthak Sourav,8260607686,In,Cloud Engineer - DevOps,DevOps
+E0159,Daipayan Chowdhury,8910433152,In,Cloud Engineer - DevOps,DevOps
+E0050,T. Sreevalli,91-6309598546,In,Associate Cloud Engineer,Engineering
+E0066,Pujari Yaswanth Srinivas Manaswith,8074588052,Leave,Associate Cloud Engineer,Engineering
+E0103,Shagun Shree,,In,Associate Cloud Engineer,Engineering
+E0105,Suvradeep Chowdhury,7407971183,In,Associate Cloud Engineer,Engineering
+E0099,Anish Pattnaik,9438475570,In,Associate Cloud Engineer,Engineering
+E0098,Aman Sailesh,,In,Associate Cloud Engineer,Engineering
+E0101,Monobikash Deb,9401804344,In,Associate Cloud Engineer,Engineering
+E0086,Utkarsh Raj,8968965551,In,Associate Cloud Engineer,Engineering
+E0077,Vikas Narayan,8891506005,Out,Associate Cloud Engineer,Engineering
+E0119,Prashant Kumar Singh,7814159635,In,Associate Cloud Engineer,Engineering
+E0126,Himadri Das,8335822984,In,Associate Cloud Engineer,Engineering
+E0127,Soham Halder,7980264373,In,Associate Cloud Engineer,Engineering
+E0143,Krishna Guha,8637023180,Out,Associate Cloud Engineer,Engineering
+E0139,Abhishek Singh,7439908714,In,Associate Cloud Engineer,Engineering
+E0138,Manish Kumar Soni,9123741298,In,Associate Cloud Engineer,Engineering
+E0142,Aditya Dey,9564213116,In,Associate Cloud Engineer,Engineering
+E0110,Rajat Sikdar,7003087022,In,Program Manager,Management
+E0072,Gopu Karthik Reddy,,Leave,Associate Cloud Engineer - DevOps,DevOps
+E0100,Hari Om,7739508977,In,Associate Cloud Engineer - DevOps,DevOps
+E0082,Vendra Pavan Kumar,,Leave,Associate Cloud Engineer - DevOps,DevOps
+E0135,Mrinal Bhoumick,6290877836,In,Associate Cloud Engineer - DevOps,DevOps
+E0179,Md. Ehsanul Haque,,In,Associate Cloud Engineer - DevOps,DevOps
+E0084,Jnanaranjan Mohapatra,9881981857,In,Trainee Cloud Engineer,Engineering
+E0134,Dibya Ranjan Biswal,7328021344,Yet to check-in,Trainee Cloud Engineer,Engineering
+E0136,Arpan Dey,8167075101,In,Trainee Cloud Engineer,Engineering
+E0140,Supriya Kumari,8584874263,Out,Trainee Cloud Engineer,Engineering
+E0146,Sayantan Bhar,9051867246,In,Trainee Cloud Engineer,Engineering
+E0150,Varsha Sharma,6291507653,Out,Trainee Cloud Engineer,Engineering
+E0147,Sushan Dey,9874037751,In,Trainee Cloud Engineer,Engineering
+E0152,Soham Bhowmick,8158943410,Yet to check-in,Trainee Cloud Engineer,Engineering
+E0169,Ishika Hota,8102522650,Leave,Trainee Cloud Engineer,Engineering
+E0170,Abhijeet Yadav,7632821048,Out,Trainee Cloud Engineer,Engineering
+E0173,Parth Singh,8840607165,Weekend,Trainee Cloud Engineer,Engineering
+E0175,Priyam Das,8144923173,In,Trainee Cloud Engineer,Engineering
+E0176,Sanjana Pradhan,8637262477,Out,Trainee Cloud Engineer,Engineering
+E0177,Taufique Alam,8209360801,Out,Trainee Cloud Engineer,Engineering
+E0184,Keshav Arya,9871908614,In,Trainee Cloud Engineer,Engineering
+E0186,Advait Singh Royal,6376286105,In,Trainee Cloud Engineer,Engineering
+E0118,Biplab Roy,9830805611,In,IT Support Engineer,IT
+E0137,Hritik Singh,9123964918,In,Associate Data Engineer,Data
+E0144,Himangshu Bhowmik,7001514996,In,Associate Data Engineer,Data
+E0154,Shovraj Mukherjee,8240459463,In,Manager Application Development,Application Development
+E0157,Ayushman Das,8721983504,In,Trainee Linux Administrator,System Admin
+E0164,Ashaduzzaman Mondal,,In,Mern Stack Developer,Frontend
+E0160,Sarthak Biswas,9749891792,In,Trainee Developer,Development
+E0174,Pranjal Kumar Jha,9431936009,In,Junior Data Engineer,Data
+E0198,Prudhvi Kola,,,Associate Consultant,Consulting
