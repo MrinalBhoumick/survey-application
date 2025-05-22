@@ -19,9 +19,8 @@ CATEGORIES = [
     "Leadership (Optional)"
 ]
 
-# --- Load secrets for admin credentials
-ADMIN_USERNAME = st.secrets["admin"]["username"]
-HASHED_PASSWORD = st.secrets["admin"]["password"]
+ADMIN_USERNAME = "admin"
+HASHED_PASSWORD = "$2b$12$tvqtcH5bbW7wJ0wc3LqwqeNQYDOsh0dliccsdvz2lekFGOMPf3lwe"
 
 # --- Initialize data file if not exists
 if not os.path.exists(REVIEW_FILE):
