@@ -24,7 +24,7 @@ HASHED_PASSWORD = "$2b$12$tvqtcH5bbW7wJ0wc3LqwqeNQYDOsh0dliccsdvz2lekFGOMPf3lwe"
 
 # --- Initialize data file if not exists
 if not os.path.exists(REVIEW_FILE):
-    pd.DataFrame(columns=["id", "timestamp", "employee_id", "employee_name"] + CATEGORIES + ["comment"]).to_csv(REVIEW_FILE, index=False)
+    pd.DataFrame(columns=["id", "timestamp", "employee_id", "employee_name", "ip_address"] + CATEGORIES + ["comment"]).to_csv(REVIEW_FILE, index=False)
 
 # --- Utility Functions
 @st.cache_data
@@ -42,6 +42,13 @@ def save_review(entry):
     df = load_reviews()
     df = pd.concat([df, pd.DataFrame([entry])], ignore_index=True)
     df.to_csv(REVIEW_FILE, index=False)
+
+def get_ip():
+    import streamlit.web.server.websocket_headers
+    try:
+        return streamlit.web.server.websocket_headers._get_websocket_headers().get("X-Forwarded-For", "unknown").split(",")[0].strip()
+    except:
+        return "unknown"
 
 # --- Search employees by name or ID
 def employee_search_selectbox(employees_df, label="Select Employee"):
@@ -68,8 +75,15 @@ def show_survey_form():
     st.title("📝 Workmates Peer Review Form")
     st.markdown("Please provide your anonymous feedback about your colleague. Your responses will be confidential.")
 
-    employees = load_employees()
+    user_ip = get_ip()
+    all_reviews = load_reviews()
+    user_reviews = all_reviews[all_reviews["ip_address"] == user_ip]
 
+    if user_reviews.shape[0] >= 10:
+        st.error("❌ You have reached the maximum of 10 submissions from your IP address.")
+        st.stop()
+
+    employees = load_employees()
     emp = employee_search_selectbox(employees)
     if emp is None:
         st.stop()
@@ -88,12 +102,12 @@ def show_survey_form():
             "timestamp": datetime.now().isoformat(),
             "employee_id": emp['Employee ID'],
             "employee_name": emp['Employee Name'],
+            "ip_address": user_ip,
             "comment": comment.strip(),
             **ratings
         }
         save_review(review)
 
-        # --- Animated Card UI
         st.markdown(f"""
             <div style="
                 background: linear-gradient(135deg, #89f7fe, #66a6ff);
@@ -119,8 +133,6 @@ def show_survey_form():
         """, unsafe_allow_html=True)
 
         st.balloons()
-
-        # Prevent rerun so the card stays visible
         st.stop()
 
 def show_admin_portal():
@@ -148,20 +160,17 @@ def show_admin_portal():
             df["timestamp"] = pd.to_datetime(df["timestamp"])
             df["timestamp_formatted"] = df["timestamp"].dt.strftime("%Y-%m-%d %H:%M")
 
-            # Filters
             with st.expander("📌 Filters", expanded=False):
                 selected_employee = st.multiselect("Filter by Employee", df["employee_name"].unique())
                 if selected_employee:
                     df = df[df["employee_name"].isin(selected_employee)]
 
-            # Data Table
             st.subheader("📋 Peer Reviews")
             st.dataframe(
                 df[["timestamp_formatted", "employee_name"] + CATEGORIES + ["comment"]]
                 .rename(columns={"timestamp_formatted": "Timestamp", "employee_name": "Employee"})
             )
 
-            # Summary
             st.subheader("📈 Summary Statistics")
             stats = df.groupby("employee_name")[CATEGORIES].mean().reset_index()
             stats["Total Score"] = stats[CATEGORIES].mean(axis=1)
@@ -171,12 +180,10 @@ def show_admin_portal():
             numeric_cols = stats.select_dtypes(include="number").columns
             st.dataframe(stats.style.format({col: "{:.2f}" for col in numeric_cols}), use_container_width=True)
 
-            # Charts
             fig = px.bar(stats, x="Employee", y="Total Score", title="🏆 Average Total Score by Employee",
                          labels={"Employee": "Employee", "Total Score": "Average Score"})
             st.plotly_chart(fig, use_container_width=True)
 
-            # Export Options
             st.subheader("⬇️ Export Data")
             csv = df.to_csv(index=False).encode("utf-8")
             st.download_button("📥 Download CSV", csv, "peer_reviews.csv", "text/csv")
