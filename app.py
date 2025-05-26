@@ -5,6 +5,8 @@ import plotly.express as px
 from datetime import datetime
 import uuid
 import os
+import random
+import string
 
 # --- Constants
 EMPLOYEE_FILE = "employee_list.csv"
@@ -24,7 +26,7 @@ HASHED_PASSWORD = "$2b$12$tvqtcH5bbW7wJ0wc3LqwqeNQYDOsh0dliccsdvz2lekFGOMPf3lwe"
 
 # --- Initialize data file if not exists
 if not os.path.exists(REVIEW_FILE):
-    pd.DataFrame(columns=["id", "timestamp", "employee_id", "employee_name", "ip_address"] + CATEGORIES + ["comment"]).to_csv(REVIEW_FILE, index=False)
+    pd.DataFrame(columns=["id", "timestamp", "employee_id", "employee_name", "user_token"] + CATEGORIES + ["comment"]).to_csv(REVIEW_FILE, index=False)
 
 # --- Utility Functions
 @st.cache_data
@@ -43,12 +45,13 @@ def save_review(entry):
     df = pd.concat([df, pd.DataFrame([entry])], ignore_index=True)
     df.to_csv(REVIEW_FILE, index=False)
 
-def get_ip():
-    import streamlit.web.server.websocket_headers
-    try:
-        return streamlit.web.server.websocket_headers._get_websocket_headers().get("X-Forwarded-For", "unknown").split(",")[0].strip()
-    except:
-        return "unknown"
+def generate_captcha():
+    return ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
+
+def get_user_token():
+    if 'user_token' not in st.session_state:
+        st.session_state['user_token'] = generate_captcha()
+    return st.session_state['user_token']
 
 # --- Search employees by name or ID
 def employee_search_selectbox(employees_df, label="Select Employee"):
@@ -75,12 +78,14 @@ def show_survey_form():
     st.title("📝 Workmates Peer Review Form")
     st.markdown("Please provide your anonymous feedback about your colleague. Your responses will be confidential.")
 
-    user_ip = get_ip()
+    user_token = get_user_token()
+    st.info(f"🔐 Your unique review token: `{user_token}` (Do not refresh the page to retain this session)")
+
     all_reviews = load_reviews()
-    user_reviews = all_reviews[all_reviews["ip_address"] == user_ip]
+    user_reviews = all_reviews[all_reviews["user_token"] == user_token]
 
     if user_reviews.shape[0] >= 10:
-        st.error("❌ You have reached the maximum of 10 submissions from your IP address.")
+        st.error("❌ You have reached the maximum of 10 submissions from this session.")
         st.stop()
 
     employees = load_employees()
@@ -102,7 +107,7 @@ def show_survey_form():
             "timestamp": datetime.now().isoformat(),
             "employee_id": emp['Employee ID'],
             "employee_name": emp['Employee Name'],
-            "ip_address": user_ip,
+            "user_token": user_token,
             "comment": comment.strip(),
             **ratings
         }
